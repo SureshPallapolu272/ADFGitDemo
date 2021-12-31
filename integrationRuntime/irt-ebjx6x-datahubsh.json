@@ -1,0 +1,7 @@
+{
+	"name": "irt-ebjx6x-datahubsh",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "Datahub Self-hosted IR"
+	}
+}

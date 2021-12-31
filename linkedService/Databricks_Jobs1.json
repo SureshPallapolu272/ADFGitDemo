@@ -1,0 +1,24 @@
+{
+	"name": "Databricks_Jobs1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://southeastasia.azuredatabricks.net",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "CONNECTION-ADB-DATABRICKS1-PAT-TOKEN"
+			},
+			"existingClusterId": "0214-144625-fetch582"
+		},
+		"connectVia": {
+			"referenceName": "irt-ebjx6x-datahubsh",
+			"type": "IntegrationRuntimeReference"
+		},
+		"annotations": []
+	}
+}

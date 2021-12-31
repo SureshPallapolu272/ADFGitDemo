@@ -1,0 +1,19 @@
+{
+	"name": "PL_Test",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait10 seconds",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 10
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-12-01T02:13:42Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

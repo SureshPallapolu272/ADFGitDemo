@@ -1,0 +1,28 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set-previous_month",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Set-previous_month",
+					"value": {
+						"value": "@formatDateTime(subtractFromTime(addDays(utcnow(), -1), 1, 'Month'), 'yyyyMM')\n\n",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"Set-previous_month": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-12-24T15:08:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,220 @@
+{
+	"name": "Pipeline-PCA-Report-Main",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set-previous_month",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "previous_month",
+					"value": {
+						"value": "@formatDateTime(convertTimeZone(subtractFromTime(addDays(utcnow(), -1), 1, 'Month'), 'UTC', 'Singapore Standard Time'), 'yyyyMM')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set-business_dt",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "business_dt",
+					"value": {
+						"value": "@formatDateTime(addDays(convertTimeZone(utcnow(), 'UTC', 'Singapore Standard Time'),-1), 'yyyyMMdd')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set-business_month",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "business_month",
+					"value": {
+						"value": "@formatDateTime(convertTimeZone(addDays(utcnow(), -1), 'UTC', 'Singapore Standard Time'), 'yyyyMM')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set-business_yr",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "business_yr",
+					"value": {
+						"value": "@formatDateTime(convertTimeZone(addDays(utcnow(), -1), 'UTC', 'Singapore Standard Time'), 'yyyy')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set-startdt",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "startdt",
+					"value": {
+						"value": "@formatDateTime(convertTimeZone(addDays(utcnow(), -1), 'UTC', 'Singapore Standard Time'), 'yyyyMM01')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set-prevyr_dt",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "prevyr_dt",
+					"value": {
+						"value": "@formatDateTime(convertTimeZone(subtractFromTime(utcnow(), 1, 'Year'), 'UTC', 'Singapore Standard Time'), 'yyyyMMdd')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set-tableName",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tableName",
+					"value": {
+						"value": "@formatDateTime(convertTimeZone(addDays(utcnow(), -1), 'UTC', 'Singapore Standard Time'), 'yyyyMM')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "PCA-Report-Main",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Set-previous_month",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set-business_dt",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set-business_month",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set-tableName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set-business_yr",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set-startdt",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set-prevyr_dt",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/PCA/pca_report_main",
+					"baseParameters": {
+						"previous_month": {
+							"value": "@variables('previous_month')",
+							"type": "Expression"
+						},
+						"business_dt": {
+							"value": "@variables('business_dt')",
+							"type": "Expression"
+						},
+						"business_month": {
+							"value": "@variables('business_month')",
+							"type": "Expression"
+						},
+						"tableName": {
+							"value": "@variables('tableName')",
+							"type": "Expression"
+						},
+						"business_yr": {
+							"value": "@variables('business_yr')",
+							"type": "Expression"
+						},
+						"startdt": {
+							"value": "@variables('startdt')",
+							"type": "Expression"
+						},
+						"prevyr_dt": {
+							"value": "@variables('prevyr_dt')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "Databricks_Jobs1",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"variables": {
+			"previous_month": {
+				"type": "String"
+			},
+			"business_dt": {
+				"type": "String"
+			},
+			"business_month": {
+				"type": "String"
+			},
+			"tableName": {
+				"type": "String"
+			},
+			"business_yr": {
+				"type": "String"
+			},
+			"startdt": {
+				"type": "String"
+			},
+			"prevyr_dt": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "PCA"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-12-24T15:08:33Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

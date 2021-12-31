@@ -1,0 +1,25 @@
+{
+	"name": "ds_sqloutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_SQLConnection",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sinktablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().sinktablename",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
